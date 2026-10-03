@@ -1,0 +1,16 @@
+# gba-mep-docx-toc bundle patch（DeepSeek Harness 原生插件）
+#
+# 本文件用 `- insert:` 列表语法在 profile 已有的组合树之上叠加一行：本包入口。
+# loader 按**包名**解析到 `package.json#main`（`lib/index.js`），由入口把随包的
+# Word 目录技能注册进宿主的 `skills` 服务。
+#
+# ⚠️ 为什么不能改成相对源码路径：官方文档明确要求组合包的 patch 插入一行
+#   `name` = 本包包名——「插件行按包名而不是相对源码路径引用这个包，这样 Node 的模块
+#   解析才能找到已安装的代码」。patch 里的这一行才是会被 import 的东西；
+#   `package.json#main` 不会因为包被列进 profile 的 bundles 就自动执行。
+#
+# 执行面披露：本文件**没有** `!!js` 表达式，没有任何加载期求值，不读环境变量，
+#   不 spawn、不 IO。整行只有一个 id 与一个包名，信任边界等于「安装了这个包」本身。
+- insert:
+    - id: gba-mep-docx-toc
+      name: gba-mep-docx-toc

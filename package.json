@@ -1,0 +1,55 @@
+{
+  "name": "gba-mep-docx-toc",
+  "version": "1.0.0",
+  "description": "DeepSeek Harness bundle that registers a Word table-of-contents skill: insert a real TOC field into an existing .docx with graded indent, dot leaders, right-aligned page numbers and _Toc bookmarks, using only the Python standard library.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "SKILL.md",
+    "scripts",
+    "references",
+    "cordis.patch.yml",
+    "screenshots.json",
+    "assets",
+    "LICENSE.md",
+    "README.md",
+    "README.zh.md"
+  ],
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "skill",
+    "bundle",
+    "docx",
+    "toc",
+    "table-of-contents",
+    "ooxml"
+  ],
+  "license": "MIT",
+  "author": "GBA 工程自动化",
+  "homepage": "https://github.com/gba-mep/docx-toc#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gba-mep/docx-toc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gba-mep/docx-toc/issues"
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
