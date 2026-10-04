@@ -53,26 +53,26 @@ test('files 白名单内的每一条都真实存在（npm 不会静默少发文�
   }
 })
 
-test('npm 的 repository 指回被收錄的 GitHub 倉（官方關聯規則）', () => {
-  // awesome-dsh-plugin 的規則：已發布 npm 包的 repository 必須指回被收錄的那個倉，
-  // 否則兩者不會關聯（這是刻意設計，防止包掛到並未認領它的倉上）。
-  assert.ok(pkg.repository, 'package.json 需要 repository 欄位')
+test('npm 的 repository 指回被收录的 GitHub 仓（官方关联规则）', () => {
+  // awesome-dsh-plugin 的规则：已发布 npm 包的 repository 必须指回被收录的那个仓，
+  // 否则两者不会关联（这是刻意设计，防止包挂到并未认领它的仓上）。
+  assert.ok(pkg.repository, 'package.json 需要 repository 栏位')
   assert.equal(pkg.repository.type, 'git')
-  assert.match(pkg.repository.url, /^git\+https:\/\/github\.com\/[^/]+\/[^/]+\.git$/, 'repository.url 應為 GitHub https 形式')
+  assert.match(pkg.repository.url, /^git\+https:\/\/github\.com\/[^/]+\/[^/]+\.git$/, 'repository.url 应为 GitHub https 形式')
   const slug = pkg.repository.url.replace(/^git\+https:\/\/github\.com\//, '').replace(/\.git$/, '')
-  assert.equal(slug, 'gba-mep/docx-toc', 'repository 必須指向清單要收錄的那個倉')
+  assert.equal(slug, 'gba-mep/docx-toc', 'repository 必须指向清单要收录的那个仓')
   assert.equal(pkg.homepage, `https://github.com/${slug}#readme`)
   assert.equal(pkg.bugs?.url, `https://github.com/${slug}/issues`)
 })
 
-test('截圖聲明指向倉庫內的 GitHub 託管路徑', () => {
+test('截图声明指向仓库内的 GitHub 托管路径', () => {
   const file = join(packageRoot, 'screenshots.json')
-  if (!existsSync(file)) return // 截圖是選用聲明
+  if (!existsSync(file)) return // 截图是选用声明
   const list = JSON.parse(readFileSync(file, 'utf8'))
   const shots = Array.isArray(list) ? list : list.screenshots
-  assert.ok(Array.isArray(shots) && shots.length >= 1 && shots.length <= 8, '截圖 1-8 張')
+  assert.ok(Array.isArray(shots) && shots.length >= 1 && shots.length <= 8, '截图 1-8 张')
   for (const shot of shots) {
-    assert.ok(!shot.startsWith('/') && !shot.includes('..'), `截圖路徑不得跳出插件目錄：${shot}`)
-    assert.ok(existsSync(join(packageRoot, shot)), `截圖 ${shot} 必須隨倉庫存在`)
+    assert.ok(!shot.startsWith('/') && !shot.includes('..'), `截图路径不得跳出插件目录：${shot}`)
+    assert.ok(existsSync(join(packageRoot, shot)), `截图 ${shot} 必须随仓库存在`)
   }
 })
